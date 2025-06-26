@@ -1,0 +1,27 @@
+name: Tag release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+
+    outputs:
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      release_version: ${{ steps.semantic.outputs.new_release_version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
