@@ -1,12 +1,16 @@
-name: Tag release
+name: Tag commit
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
+    secrets:
+      token:
+        required: true
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches: [main]
+  # workflow_dispatch:
 
 jobs:
   tag:
@@ -24,4 +28,4 @@ jobs:
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.token }}
