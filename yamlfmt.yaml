@@ -1,0 +1,4 @@
+match_type: doublestar
+
+exclude:
+  - ".github/"
